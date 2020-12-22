@@ -34,20 +34,30 @@ class Detail extends Component {
         return (
           <div className="boxWhite">
             <h2>Pokemon Detail</h2>
-            {
+            <table border="1">
+                <tr>
+                    <th>Ability</th>
+                    <th>Image</th>
+                </tr>
+                {
               items.length > 0 ? items.map(item => {
-              const {name, url} = item;    
+              const {name} = item;
+              let image = "https://pokeres.bastionbot.org/images/pokemon/"+this.props.match.params.id+".png";
+                  
                return (
-               <div key={name} className="bgCircle">
-              <center><Link to={url}>Detail</Link> </center><br />
-               <div className="ctr">        
-                 Ability :  {name}
-                </div>
 
-              </div>
+            <tr>
+                <td key={name}>
+                    {name}
+                </td>
+                <td>
+                    <img src={image}></img>
+                </td>
+            </tr>
               );
             }) : null
           }
+            </table>
           </div>
         );
 
