@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+import { useParams } from "react-router-dom"
 
-class Home extends Component {
+
+class Detail extends Component {
 
   constructor(props) {
     super(props);
@@ -11,12 +13,13 @@ class Home extends Component {
   }
 
   componentDidMount() {
-      fetch("https://pokeapi.co/api/v2/pokemon/")
+    
+      fetch("https://pokeapi.co/api/v2/pokemon/" + this.props.match.params.id)
         .then(res => res.json())
-        .then(parsedJSON => parsedJSON.results.map(data => (
+        .then(parsedJSON => parsedJSON.abilities.map(data => (
           {
-            name: `${data.name}`,
-            url: `${data.url}`,
+            name: `${data.ability.name}`,
+            url: `${data.ability.url}`,
           }
         )))
         .then(items => this.setState({
@@ -30,16 +33,15 @@ class Home extends Component {
       const {items } = this.state;
         return (
           <div className="boxWhite">
-            <h2>Pokemon List</h2>
+            <h2>Pokemon Detail</h2>
             {
               items.length > 0 ? items.map(item => {
               const {name, url} = item;    
-              let id = url.slice(34);
                return (
                <div key={name} className="bgCircle">
-              <center><Link to={"detail/" + id}>Detail</Link> </center><br />
+              <center><Link to={url}>Detail</Link> </center><br />
                <div className="ctr">        
-                  {name}
+                 Ability :  {name}
                 </div>
 
               </div>
@@ -52,4 +54,4 @@ class Home extends Component {
     }
   }
 
-export default Home;
+export default Detail;
