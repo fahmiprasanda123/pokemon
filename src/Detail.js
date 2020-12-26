@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
-import { useParams } from "react-router-dom"
+
 
 
 class Detail extends Component {
@@ -51,7 +50,7 @@ class Detail extends Component {
                     {name}
                 </td>
                 <td>
-                    <img src={image}></img>
+                    <img src={image} alt=""></img>
                 </td>
             </tr>
               );
